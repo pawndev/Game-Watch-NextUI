@@ -1,0 +1,50 @@
+name: Build & Release GW.pak
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version (e.g. v1.0.0)"
+        required: true
+        type: string
+      prerelease:
+        description: "Mark as pre-release"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (current branch)
+        uses: actions/checkout@v4
+
+      - name: Install the aarch64 toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential gcc-aarch64-linux-gnu g++-aarch64-linux-gnu git make file zip jq
+
+      - name: Set up mise
+        uses: jdx/mise-action@v2
+
+      - name: Compile gw_libretro.so
+        run: mise run build-core
+
+      - name: Package the .pakz archive
+        run: mise run package
+
+      - name: Create the GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.version }}
+          name: GW.pak ${{ inputs.version }}
+          target_commitish: ${{ github.ref_name }}
+          prerelease: ${{ inputs.prerelease }}
+          generate_release_notes: true
+          files: |
+            dist/*.pakz
+            dist/*.pakz.sha256
