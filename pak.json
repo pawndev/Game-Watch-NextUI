@@ -1,0 +1,16 @@
+{
+  "name": "Game & Watch",
+  "version": "v1.0.0",
+  "type": "EMU",
+  "description": "Game & Watch simulators (MADrigal) via the gw libretro core for NextUI/MinUI",
+  "author": "Pawndev",
+  "repo_url": "https://github.com/pawndev/Game-Watch-NextUI",
+  "release_filename": "GW.pakz",
+  "changelog": {
+    "v1.0.0": "First release"
+  },
+  "screenshots": [],
+  "platforms": [
+    "tg5040"
+  ]
+}
