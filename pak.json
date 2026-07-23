@@ -7,6 +7,7 @@
   "repo_url": "https://github.com/pawndev/Game-Watch-NextUI",
   "release_filename": "GW.pakz",
   "changelog": {
+    "v1.0.2": "chore: remove txt from Game folder",
     "v1.0.1": "fix: Build the core with correct glibc version",
     "v1.0.0": "feat: Non-functional first release"
   },
