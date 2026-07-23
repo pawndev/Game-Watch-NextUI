@@ -23,16 +23,19 @@ jobs:
       - name: Checkout (current branch)
         uses: actions/checkout@v4
 
-      - name: Install the aarch64 toolchain
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential gcc-aarch64-linux-gnu g++-aarch64-linux-gnu git make file zip jq
-
       - name: Set up mise
         uses: jdx/mise-action@v2
 
-      - name: Compile gw_libretro.so
-        run: mise run build-core
+      - name: Compile gw_libretro.so (Docker, tg5040 toolchain)
+        run: mise run docker-build
+
+      - name: Check the core's glibc requirement
+        run: |
+          MAX=$(strings -a Emus/tg5040/GW.pak/gw_libretro.so | grep -oE 'GLIBC_[0-9]+\.[0-9]+' | sort -Vu | tail -1)
+          echo "Max glibc required: $MAX"
+          if [ "$(printf '%s\n' "$MAX" GLIBC_2.33 | sort -V | tail -1)" != "GLIBC_2.33" ]; then
+            echo "ERROR: core requires $MAX, newer than the firmware's glibc (2.33)"; exit 1
+          fi
 
       - name: Package the .pakz archive
         run: mise run package
