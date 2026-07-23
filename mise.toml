@@ -1,0 +1,11 @@
+[tasks.build-core]
+description = "Cross-compile gw_libretro.so on the host (requires the aarch64 toolchain installed)"
+run = "./build/build-core.sh"
+
+[tasks.docker-build]
+description = "Cross-compile gw_libretro.so via Docker (no host toolchain needed)"
+run = "./build/docker-build.sh"
+
+[tasks.package]
+description = "Zip Emus/ and Roms/ into a NextUI .pakz archive under dist/"
+run = "./build/package.sh"
