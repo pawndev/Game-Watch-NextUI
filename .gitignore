@@ -1,0 +1,8 @@
+# Packaged .pakz archives
+dist/
+
+# macOS
+.DS_Store
+
+# JetBrains IDE
+.idea/
