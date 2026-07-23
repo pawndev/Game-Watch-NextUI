@@ -1,5 +1,5 @@
 {
-  "name": "Game & Watch",
+  "name": "GW",
   "version": "v1.0.0",
   "type": "EMU",
   "description": "Game & Watch simulators (MADrigal) via the gw libretro core for NextUI/MinUI",
