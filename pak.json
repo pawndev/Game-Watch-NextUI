@@ -1,6 +1,6 @@
 {
   "name": "GW",
-  "version": "v1.0.0",
+  "version": "v1.0.3",
   "type": "EMU",
   "description": "Game & Watch simulators (MADrigal) via the gw libretro core for NextUI/MinUI",
   "author": "Pawndev",
